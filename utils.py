@@ -5,7 +5,7 @@ import numpy as np
 import torchvision.utils as vutils
 from skimage import measure
 from loguru import logger
-from tools.render import Visualizer
+from .tools.render import Visualizer
 import cv2
 
 
@@ -72,6 +72,7 @@ def tocuda(vars):
     elif isinstance(vars, str):
         return vars
     else:
+        print("error:",vars)
         raise NotImplementedError("invalid input type {} for tensor2numpy".format(type(vars)))
 
 
@@ -224,6 +225,7 @@ class SaveScene(object):
         return mesh
 
     def vis_incremental(self, epoch_idx, batch_idx, imgs, outputs):
+        print("vis")
         tsdf_volume = outputs['scene_tsdf'][batch_idx].data.cpu().numpy()
         origin = outputs['origin'][batch_idx].data.cpu().numpy()
         if self.cfg.DATASET == 'demo':
