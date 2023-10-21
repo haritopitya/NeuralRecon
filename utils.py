@@ -225,7 +225,6 @@ class SaveScene(object):
         return mesh
 
     def vis_incremental(self, epoch_idx, batch_idx, imgs, outputs):
-        print("vis")
         tsdf_volume = outputs['scene_tsdf'][batch_idx].data.cpu().numpy()
         origin = outputs['origin'][batch_idx].data.cpu().numpy()
         if self.cfg.DATASET == 'demo':
