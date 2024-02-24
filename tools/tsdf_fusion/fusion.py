@@ -516,6 +516,7 @@ class TSDFVolumeTorch:
             torch.arange(0, self._vol_dim[0]),
             torch.arange(0, self._vol_dim[1]),
             torch.arange(0, self._vol_dim[2]),
+            indexing='ij',
         )
         self._vox_coords = torch.stack([xv.flatten(), yv.flatten(), zv.flatten()], dim=1).long().to(self.device)
 

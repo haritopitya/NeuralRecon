@@ -72,7 +72,7 @@ def tocuda(vars):
     elif isinstance(vars, str):
         return vars
     else:
-        print("error:",vars)
+        print("error:", vars)
         raise NotImplementedError("invalid input type {} for tensor2numpy".format(type(vars)))
 
 
@@ -145,7 +145,7 @@ def coordinates(voxel_dim, device=torch.device('cuda')):
     x = torch.arange(nx, dtype=torch.long, device=device)
     y = torch.arange(ny, dtype=torch.long, device=device)
     z = torch.arange(nz, dtype=torch.long, device=device)
-    x, y, z = torch.meshgrid(x, y, z)
+    x, y, z = torch.meshgrid(x, y, z, indexing='ij')
     return torch.stack((x.flatten(), y.flatten(), z.flatten()))
 
 

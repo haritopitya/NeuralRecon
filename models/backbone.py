@@ -25,7 +25,7 @@ class MnasMulti(nn.Module):
         super(MnasMulti, self).__init__()
         depths = _get_depths(alpha)
         if alpha == 1.0:
-            MNASNet = torchvision.models.mnasnet1_0(pretrained=True, progress=True)
+            MNASNet = torchvision.models.mnasnet1_0(progress=True)
         else:
             MNASNet = torchvision.models.MNASNet(alpha=alpha)
 
