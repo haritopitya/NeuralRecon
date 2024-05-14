@@ -236,14 +236,13 @@ class SaveScene(object):
             # Marching cubes
             mesh = self.tsdf2mesh(self.cfg.MODEL.VOXEL_SIZE, origin, tsdf_volume)
             # vis
-            key_frames = []
-            for img in imgs[::3]:
+            key_frames = np.zeros([((len(imgs)+2)//3)*(imgs[0].shape[1]//2), 3*(imgs[0].shape[2]//2),3])
+            for i,img in enumerate(imgs):
                 img = img.permute(1, 2, 0)
                 img = img[:, :, [2, 1, 0]]
                 img = img.data.cpu().numpy()
                 img = cv2.resize(img, (img.shape[1] // 2, img.shape[0] // 2))
-                key_frames.append(img)
-            key_frames = np.concatenate(key_frames, axis=0)
+                key_frames[i%3*img.shape[0]:(i%3+1)*img.shape[0], (i//3)*img.shape[1]:(i//3+1)*img.shape[1]] = img
             cv2.imshow('Selected Keyframes', key_frames / 255)
             cv2.waitKey(1)
             # vis mesh
