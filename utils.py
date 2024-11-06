@@ -249,7 +249,7 @@ class SaveScene(object):
             self.vis.vis_mesh(mesh)
 
     def save_incremental(self, epoch_idx, batch_idx, imgs, outputs):
-        save_path = os.path.join('incremental_' + self.log_dir + '_' + str(epoch_idx), self.scene_name)
+        save_path = os.path.join('dji_log','incremental_' + self.log_dir + '_' + str(epoch_idx), self.scene_name)
         if not os.path.exists(save_path):
             os.makedirs(save_path)
 
@@ -279,7 +279,7 @@ class SaveScene(object):
             data = {'origin': origin,
                     'voxel_size': self.cfg.MODEL.VOXEL_SIZE,
                     'tsdf': tsdf_volume}
-            save_path = '{}_fusion_eval_{}'.format(self.log_dir, epoch)
+            save_path = 'dji_log/{}_fusion_eval_{}'.format(self.log_dir, epoch)
             if not os.path.exists(save_path):
                 os.makedirs(save_path)
             np.savez_compressed(
